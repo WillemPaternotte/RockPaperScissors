@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 
-frames = np.load("./data/video.npy")
+frames = np.load("./data/SCISSORS/video.npy")
 
 for i in range(len(frames)):
     cv.imshow("loaded video", frames[i])
