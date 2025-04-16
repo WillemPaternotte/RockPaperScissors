@@ -11,12 +11,10 @@ import os
 
 def get_last_video_index(name):
     list_of_files = glob.glob('./data/' + name + '/Video/*')  # * means all if need specific format then *.csv
-    print(list_of_files)
     if len(list_of_files) <= 0:
         return -1
     latest_file = max(list_of_files, key=os.path.getctime)
     last_index = latest_file[20 + len(name):]
-    print(last_index)
     return int(last_index[:-4])
 
 
@@ -98,7 +96,8 @@ while (running):
     screen.blit(font.render("1 for ROCK, 2 for PAPER, 3 for SCISSORS", True, (0, 0, 0)), (20, 40))
     screen.blit(font.render("The game will count down from 3,", True, (0, 0, 0)), (20, 60))
     screen.blit(font.render("do your action at SHOOT! ", True, (0, 0, 0)), (20, 80))
-    surf = pygame.surfarray.make_surface(last_frame)
+    surf = cv.cvtColor(last_frame, cv.COLOR_BGR2RGB)
+    surf = pygame.surfarray.make_surface(surf)
     surf = pygame.transform.rotate(surf, -90)
     screen.blit(surf, (150, 110))
     pygame.display.update()
